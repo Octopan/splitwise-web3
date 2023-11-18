@@ -1,19 +1,50 @@
-# 🏗 Scaffold-ETH 2
+# Splitwise-Crypto Integration App
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+## Prerequisites
+- Node.js and Yarn installed
+- MetaMask extension installed in the browser
+- (If applicable) Ethereum blockchain environment setup for deploying contracts
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## Installation
+1. Clone the repository:
+   ```
+   git clone [repository-url]
+   ```
+2. Navigate to the project directory:
+   ```
+   cd splitwise-crypto-integration-app
+   ```
+3. Install dependencies:
+   ```
+   yarn install
+   ```
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, and Typescript.
+## Running the Application
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+- (If applicable) To deploy smart contracts to the blockchain:
+   ```
+   yarn deploy
+   ```
+- (If applicable) To interact with the local blockchain:
+   ```
+   yarn chain
+   ```
+   
+- To start the local development server:
+   ```
+   yarn start
+   ```
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/1171422a-0ce4-4203-bcd4-d2d1941d198b)
+## Usage
+- Open the application in the browser.
+- Connect to MetaMask using the provided button on the webpage.
+- Follow the in-app instructions for managing and settling expenses.
+
+---
+
+This README assumes a more complex project structure than what you currently have. If your project evolves to include backend services, smart contract development, or other features requiring these commands, you would need to set up the appropriate package.json scripts and dependencies. 
+
+Since your current project is a simple HTML file, it doesn't require Yarn or these commands. If you plan to expand the project to include these features, let me know, and I can provide more detailed instructions accordingly.
 
 ## Requirements
 
@@ -57,22 +88,4 @@ This command deploys a test smart contract to the local network. The contract is
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+Visit your app on: `http://localhost:3000`.
