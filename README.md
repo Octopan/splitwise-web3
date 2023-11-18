@@ -1,4 +1,4 @@
-# Splitwise-Crypto Integration App
+# ChainSettle
 
 ## Prerequisites
 - Node.js and Yarn installed
@@ -29,7 +29,7 @@
    ```
    yarn chain
    ```
-   
+
 - To start the local development server:
    ```
    yarn start
@@ -42,7 +42,7 @@
 
 ---
 
-This README assumes a more complex project structure than what you currently have. If your project evolves to include backend services, smart contract development, or other features requiring these commands, you would need to set up the appropriate package.json scripts and dependencies. 
+This README assumes a more complex project structure than what you currently have. If your project evolves to include backend services, smart contract development, or other features requiring these commands, you would need to set up the appropriate package.json scripts and dependencies.
 
 Since your current project is a simple HTML file, it doesn't require Yarn or these commands. If you plan to expand the project to include these features, let me know, and I can provide more detailed instructions accordingly.
 
