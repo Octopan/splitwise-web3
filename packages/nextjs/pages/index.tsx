@@ -3,7 +3,25 @@ import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 
+import React, { useState, useRef } from 'react';
+
 const Home: NextPage = () => {
+  const [amounts, setAmounts] = useState([50, 42, 420]);
+  const [names, setNames] = useState(['Alice', 'Jane Doe', 'Bob Smith']);
+  const [addresses, setAddresses] = useState(['0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', '0x00908aA4d631c3733eB04Ff62515BdaD67E4748b', '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BE']);
+  const tableRef = useRef(null);
+  const handleClick = (index) => {
+    const newAmounts = [...amounts];
+    newAmounts[index] = 0;
+    setAmounts(newAmounts);
+
+    if (tableRef.current) {
+      const amountCell = tableRef.current.rows[index + 1].cells[1];
+      sleep(1);
+      amountCell.textContent = '$0';
+    }
+  };
+
   return (
     <>
       <MetaHeader />
@@ -16,43 +34,37 @@ const Home: NextPage = () => {
         </div>
         <div className="container mt-4">
           <h3>Settle Up</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Recipient</th>
-                <th>Amount</th>
-                <th>Ethereum Address</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>John Doe</td>
-                <td>$50</td>
-                <td>0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC</td>
-                <td>
-                  <button className="btn btn-success1">Settle Up</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Alice</td>
-                <td>$42</td>
-                <td>0x90F79bf6EB2c4f870365E785982E1f101E93b906</td>
-                <td>
-                  <button className="btn btn-success2">Settle Up</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Bob</td>
-                <td>$420</td>
-                <td>0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC</td>
-                <td>
-                  <button className="btn btn-success3">Settle Up</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+
+
         </div>
+
+        <table ref={tableRef}>
+  <thead>
+    <tr>
+      <th>Recipient</th>
+      <th>Amount</th>
+      <th>Ethereum Address</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+
+</table>
+
+<tbody>
+  {amounts.map((amount, index) => (
+    <tr key={index}>
+      <td>{names[index]}</td>
+      <td>${amount}</td>
+      <td>{addresses[index].substring(0, 5)}...{addresses[index].substring(10, 15)}</td>
+      <td>
+        <button className={`btn btn-success${index + 1}`} onClick={() => handleClick(index)}>Settle Up</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
         {/*input  */}
 
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
