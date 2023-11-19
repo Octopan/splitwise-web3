@@ -1,4 +1,4 @@
-# ChainSettle
+# SplitBits
 
 ## Prerequisites
 - Node.js and Yarn installed
@@ -89,3 +89,5 @@ yarn start
 ```
 
 Visit your app on: `http://localhost:3000`.
+
+![Web UI](https://github.com/Octopan/splitwise-web3/blob/main/screenshot.jpg?raw=true)
