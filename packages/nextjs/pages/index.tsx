@@ -49,7 +49,7 @@ const Home: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center mb-8">
             <span className="block text-2xl mb-2">Welcome to </span>
-            <span className="block text-4xl font-bold">ChainSettle</span>
+            <span className="block text-4xl font-bold">SplitBits</span>
           </h1>
         </div>
         <div className="container mt-4">
