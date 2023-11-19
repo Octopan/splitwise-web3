@@ -1,29 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { NextPage } from "next";
 import Web3 from "web3";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 
-const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-
-const sendEther = async (address, amount) => {
-  const accounts = await web3.eth.getAccounts();
-  const sender = accounts[0];
-
-  web3.eth
-    .sendTransaction({
-      from: sender,
-      to: address,
-      value: web3.utils.toWei(amount.toString(), "ether"),
-    })
-    .on("receipt", console.log)
-    .on("error", console.error);
-};
-
 const Home: NextPage = () => {
-  const [amounts, setAmounts] = useState([0.050, 0.042, 0.00420]);
-  const [names, setNames] = useState(["Alice", "Jane Doe", "Bob Smith"]);
+  const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
+  const [sender, setSender] = useState("");
+
+  useEffect(() => {
+    const getAccounts = async () => {
+      const accounts = await web3.eth.getAccounts();
+      setSender(accounts[0]);
+    };
+
+    getAccounts();
+  }, []);
+
+  const sendEther = async (address, amount) => {
+    web3.eth
+      .sendTransaction({
+        from: sender,
+        to: address,
+        value: web3.utils.toWei(amount.toString(), "ether"),
+      })
+      .on("receipt", console.log)
+      .on("error", console.error);
+  };
+
+  const [amounts, setAmounts] = useState([0.05, 0.042, 0]);
+  const [names, setNames] = useState(["Alice Cooper", "John Lennon", "Bob Dylan"]);
   const [addresses, setAddresses] = useState([
     "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
     "0x00908aA4d631c3733eB04Ff62515BdaD67E4748b",
@@ -37,7 +45,7 @@ const Home: NextPage = () => {
 
     if (tableRef.current) {
       const amountCell = tableRef.current.rows[index + 1].cells[1];
-      amountCell.textContent = "$0";
+      amountCell.textContent = "0 ETH";
     }
     await sendEther(addresses[index], amounts[index]);
   };
@@ -52,36 +60,38 @@ const Home: NextPage = () => {
             <span className="block text-4xl font-bold">SplitBits</span>
           </h1>
         </div>
-        <div className="container mt-4">
-          <h3>Settle Up</h3>
-        </div>
-        <table ref={tableRef}>
-          <thead>
-            <tr>
-              <th>Recipient</th>
-              <th>Amount</th>
-              <th>Ethereum Address</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-        </table>
 
-        <tbody>
-          {amounts.map((amount, index) => (
-            <tr key={index}>
-              <td>{names[index]}</td>
-              <td>${amount}</td>
-              <td>
-                {addresses[index].substring(0, 5)}...{addresses[index].substring(10, 15)}
-              </td>
-              <td>
-                <button className={`btn btn-success${index + 1}`} onClick={() => handleClick(index)}>
-                  Settle Up
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        {/*table  */}
+        <table ref={tableRef} style={{ width: '80%' }}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: 'left' }}>Recipient</th>
+      <th style={{ textAlign: 'left' }}>Amount</th>
+      <th style={{ textAlign: 'left' }}>Ethereum Address</th>
+      <th style={{ textAlign: 'center' }}>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {amounts.map((amount, index) => (
+      <tr key={index}>
+        <td style={{ textAlign: 'left' }}>{names[index]}</td>
+        <td style={{ textAlign: 'left' }}>{amount} ETH</td>
+        <td style={{ textAlign: 'left' }}>
+          {addresses[index].substring(0, 4)}...{addresses[index].substring(11, 15)}
+        </td>
+        <td style={{ textAlign: 'center' }}>
+          <button
+            className={`btn btn-success${index + 1}`}
+            onClick={() => handleClick(index)}
+            disabled={amounts[index] === 0}
+          >
+            Settle Up
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
         {/*input  */}
 
